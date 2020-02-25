@@ -1,0 +1,7 @@
+---APRENDIZAJE EXITOSO---
+Matriz W de pesos sinapticos para la compuerta AND de 5 entradas: 
+
+ w1  w2  w3  w4  w5 
+  2    1    2    1    5  
+
+THETA = 10

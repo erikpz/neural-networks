@@ -1,0 +1,7 @@
+---APRENDIZAJE EXITOSO---
+Matriz W de pesos sinapticos para la compuerta NOT de 1 entradas: 
+
+ w1 
+  -7  
+
+THETA = -3

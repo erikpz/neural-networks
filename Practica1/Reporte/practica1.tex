@@ -1,0 +1,153 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\begin{document}
+	\begin{titlepage}
+		\centering
+		{\bfseries\LARGE INSTITUTO POLITÉCNICO NACIONAL \par}
+		\vspace{1cm}
+		{\scshape\Large Escuela Superior de Cómputo \par}
+		\vspace{3cm}
+		{\scshape\Huge Neurona de McCulloch-Pitts implementada en Matlab para compuertas lógicas \par}
+		\vspace{3cm}
+		{\itshape\Large Neural Networks \par}
+		\vfill
+		{\Large Autor: \par}
+		{\Large Erik Alberto Pizaña Canedo \par}
+		\vfill
+		{\Large Febrero 2020 \par}
+	\end{titlepage}
+	\section{INTRODUCCIÓN}
+	La neurona de McCulloch-Pitts es una unidad de cálculo que intenta modelar el comportamiento de una neurona "natural", similares a las que constituyen del cerebro humano. Ella es la unidad esencial con la cual se construye una red neuronal artificial.
+	
+	El resultado del cálculo en una neurona consiste en realizar una suma ponderada de las entradas, seguida de la aplicación de una función no lineal, como se ilustra en la siguiente figura
+
+	\subsection{Orígenes}
+	El modelo neuronal de McCulloch y Pitts de 1943, Threshold Logic Unit (TLU), o Linear Threshold Unit, fue el primer modelo neuronal moderno, y ha servido de inspiración para el desarrollo de otros modelos neuronales. Sin embargo, en muchos de los estudios en que refieren a este modelo, no se interpreta correctamente el sentido que quisieron dar originalmente McCulloch y Pitts, atribuyéndole características o funciones que no fueron descritas por sus autores, o restándole importancia a la capacidad de procesamiento del modelo. Por otro lado, el modelo McCulloch-Pitts por sí mismo está retomando importancia debido a que es uno de los pocos modelos digitales en tiempo discreto y, como para realizar implantaciones electrónicas o computacionales de las neuronas artificiales en la actualidad se utilizan sistemas digitales, con la mayoría de los modelos analógicos actuales es necesario realizar ciertas adaptaciones a los modelos al momento de implantarlos, lo que dificulta y hace imprecisa dicha implantación con respecto al comportamiento teórico derivado del modelo.	
+	\subsection{Usos de las neuronas}
+	
+	Permite hacer funciones lógicas.\\	
+	Primera aproximación a las redes neuronales.\\
+	Capacidad de computación universal (puede simular cualquier programa computable)
+	\subsection{Marco Teórico (Modelo Matemático y Arquitectura)}
+	Las características de una neurona artificial son:\\\\
+	• La salida de la neurona está en cualquiera de los dos estados: 1 o 0.\\\\
+	• La salida de la neurona depende de la suma de los pesos de las entradas. Cierto nivel debe ser superado para hacer que la neurona se active.\\\\
+	• La asociación de los pesos con las entradas modelan la eficiencia de la sinapsis (acoplamiento). Una mayor eficiencia de la sinapsis tendrá un mayor peso. La neurona es entrenada para ajustar esos pesos.
+	Estas características se muestran en la siguiente figura	
+	\begin{figure}[htb]
+		\centering
+		\includegraphics[width=6.5cm]{Mccullochpitts.png}
+		\caption{Arquitectura de Célula de McCulloch-Pitts}
+	\end{figure}	
+\begin{figure}[htb]
+	\includegraphics[width=10.5cm]{figura2.png}
+	\caption{Modelo Matemático}
+\end{figure}
+
+\subsection{Diagrama de flujo}
+Diagrama del programa en matlab: 
+\begin{figure}
+	\centering
+	\includegraphics[width=10cm]{diagrama.png}
+	\caption{Diagrama del programa | URL diagrama: https://cutt.ly/sr2jHEz}
+\end{figure}
+
+
+\subsection{Experimentos}
+Compuerta NOT (Aprendizaje no exitoso):\\
+Ingresa tipo compuerta (AND/OR/NOT): not\\
+Ingresa numero de epocas deseado (epoach > 50): 5
+
+w =
+
+-5
+
+
+teth =
+
+-10
+
+Aprendizaje NO exitoso\\\\
+Compuerta NOT (Aprendizaje exitoso):\\
+Ingresa tipo compuerta (AND/OR/NOT): not\\
+Ingresa numero de epocas deseado (epoach > 50): 50
+
+w =
+
+-7
+
+
+teth =
+
+-3
+
+Aprendizaje EXITOSO\\ \\
+Compuerta AND (Aprendizaje no exitoso):\\
+Ingresa tipo compuerta (AND/OR/NOT): and\\
+Ingresa dimension compuerta: 5\\
+Ingresa numero de epocas deseado (epoach>50): 50
+
+w =
+
+-8     0   -10    -1     6
+
+
+teth =
+
+-9
+
+Aprendizaje NO exitoso\\\\
+Compuerta AND (Aprendizaje exitoso):\\
+Ingresa tipo compuerta (AND/OR/NOT): and\\
+Ingresa dimension compuerta: 5\\
+Ingresa numero de epocas deseado (epoach>50): 10000\\
+
+w =
+
+2     1     2     1     5
+
+
+teth =
+
+10
+Aprendizaje EXITOSO\\\\
+Compuerta OR (Aprendizaje no exitoso):\\
+Ingresa tipo compuerta (AND/OR/NOT): or
+Ingresa dimension compuerta: 5
+Ingresa numero de epocas deseado (epoach>50): 50
+
+w =
+
+5     8     1    -3     1
+
+
+teth =
+
+3
+
+Aprendizaje NO exitoso\\\\
+Compuerta OR (Aprendizaje exitoso):\\
+Ingresa tipo compuerta (AND/OR/NOT): or
+Ingresa dimension compuerta: 5
+Ingresa numero de epocas deseado (epoach>50): 100
+
+w =
+
+5     4     8     6    10
+
+
+teth =
+
+2
+
+Aprendizaje EXITOSO
+\subsection{Discusión}
+Para un numero n de compuertas alto, es necesario tener mayor número de épocas para lograr un aprendizaje exitoso.
+\subsection{Conclusiones}
+Con esta práctica pudimos entender en primera instancia la arquitectura de la neurona de McCulloch-Pitts al igual que entender su modelo matemático y llevarlo a la implementación a través de matlab, así como entender que este tipo de neurona llega al objetivo, llamado aprendizaje exitoso, por medio de prueba y error. Se pudo observar también que entre más entradas a la neurona tengamos, por probabilidad, tendremos que tener un alto número de épocas para poder llegar al aprendizaje exitoso de forma eficaz en un sólo experimento
+\subsection{Referencias}
+Yánez Márquez, Cornelio, Y. M. C. (2012, 28 noviembre). Repositorio Digital IPN: Neurona artificial de McCulloch Pitts. Recuperado 23 febrero, 2020, de https://www.repositoriodigital.ipn.mx/handle/123456789/8640\\
+D. Michie, D.J. Spiegelhalter, C.C. Taylor (eds). Machine Learning, Neural and Statistical Classification, 1994.\\
+R. Rojas. Neural Networks: A Systematic Introduction, Springer, 1996 .ISBN 3-540-60505-3.
+\end{document}
