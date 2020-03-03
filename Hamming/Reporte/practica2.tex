@@ -1,0 +1,148 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		{\bfseries\LARGE INSTITUTO POLITÉCNICO NACIONAL \par}
+		\vspace{1cm}
+		{\scshape\Large Escuela Superior de Cómputo \par}
+		\vspace{3cm}
+		{\scshape\Huge Neurona de Hamming implementada en Matlab para clasificar vectores prototipo \par}
+		\vspace{3cm}
+		{\itshape\Large Neural Networks \par}
+		\vfill
+		{\Large Autor: \par}
+		{\Large Erik Alberto Pizaña Canedo \par}
+		\vfill
+		{\Large Marzo 2020 \par}
+	\end{titlepage}
+
+	\section{INTRODUCCIÓN}
+	La red Hamming es una red que fue diseñada para resolver problemas de reconocimiento y
+	clasificación de patrones binarios (1 o -1). Esta RNA es bastante interesante ya que cuenta con 2
+	capas distintas, en la primera se encuentra la capa FeedForward y en la segunda se encuentra la capa
+	Recurrente.
+
+	En la Figura 1 se muestra la arquitectura en forma matricial que representa a la red Hamming.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\textwidth]{arqui.png}
+		\caption{Arquitectura de Neurona de Hamming}
+	\end{figure}
+	\subsection{Orígenes}
+	Fue desarrollada por Richard P. Lippmann a mediados de 1987, al año siguiente lo publica como "An intriduction to computing with neural nets". La red es muy similar a la de Hopfield, con la única diferencia de que ésta implementa un clasificador máximo de confianza, el aprendizaje también es similar.
+	
+	\subsection{Usos de las neuronas}
+	
+	Reconocimiento de voz.\\	
+	Clasificación de patrones estadísticos.\\
+	Desarrollo de mejoras en Redes Neuronales.
+	\subsection{Marco Teórico (Modelo Matemático y Arquitectura)}
+		
+		El objetivo de la red de Hamming es decidir qué vector prototipo está más cerca del vector de entrada. Esta decisión está indicada por la salida de la capa recurrente. Hay una neurona en la capa recurrente para cada patrón prototipo. Cuando la capa recurrente converge, solo habrá una neurona con salida distinta de cero. Esta neurona indica el patrón prototipo más cercano al vector de entrada. Ahora investiguemos las dos capas de la red Hamming en detalle.\\
+		Capa de avance. \\La capa de avance realiza una correlación, o producto interno, entre cada uno de los patrones prototipo y el patrón de entrada (como veremos en la ecuación (3.17)). Para que la capa de avance realice esta correlación, las filas de la matriz de peso en la capa de avance, representada por la matriz de conexión, se establecen en los patrones prototipo. Para nuestro ejemplo de manzana y naranja esto significaría
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\textwidth]{315}
+	\end{figure}	
+La capa de avance utiliza una función de transferencia lineal, y cada elemento del vector de polarización es igual a, donde es el número de elementos en el vector de entrada. Para nuestro ejemplo, el vector de sesgo sería
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{316}
+\end{figure}
+Con estas opciones para la matriz de peso y el vector de polarización, la salida de la capa de avance es
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{317}
+\end{figure}
+Tenga en cuenta que las salidas de la capa de avance son iguales a los productos internos de cada patrón de prototipo con la entrada, más. Para dos vectores de igual longitud (norma), su producto interno será mayor cuando los vectores apunten en la misma dirección, y será menor cuando apunten en direcciones opuestas. (Discutiremos este concepto con más profundidad en los Capítulos 5, 8 y 9.) Al agregar al producto interno, garantizamos que los resultados de la capa de alimentación nunca pueden ser negativos. Esto es necesario para el correcto funcionamiento de la capa recurrente.
+Esta red se llama red de Hamming porque la neurona en la capa de alimentación con la salida más grande corresponderá al patrón prototipo más cercano en la distancia de Hamming al patrón de entrada. (La distancia de Hamming entre dos vectores es igual al número de elementos que son diferentes. Se define solo para vectores binarios). Dejamos al lector mostrar que las salidas de la capa de avance son iguales a menos dos veces las distancias de Hamming desde los patrones prototipo hasta el patrón de entrada.\\\\
+Capa recurrente.\\ La capa recurrente de la red Hamming es lo que se conoce como una capa "competitiva". Las neuronas en esta capa se inicializan con las salidas de la capa de avance, que indican la correlación entre los patrones prototipo y el vector de entrada. Luego, las neuronas compiten entre sí para determinar un ganador. Después de la competencia, solo una neurona tendrá una salida distinta de cero. La neurona ganadora indica qué categoría de entrada se presentó a la red (para nuestro ejemplo, las dos categorías son manzanas y naranjas). Las ecuaciones que describen la competencia son:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{319}
+\end{figure}
+(No olvide que los superíndices aquí indican el número de capa, no una potencia de 2.) La función de transferencia es lineal para valores positivos y cero para valores negativos. La matriz de peso W2 tiene la forma:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{320}
+\end{figure}
+donde es un número menor que 1/s-1, y es el número de neuronas en la capa recurrente.
+Una iteración de la capa recurrente procede de la siguiente manera:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{321}
+\end{figure}
+Cada elemento se reduce en la misma fracción del otro. El elemento más grande se reducirá en menos, y el elemento más pequeño se reducirá en más, por lo tanto, la diferencia entre grande y pequeño aumentará. El efecto de la capa recurrente es poner a cero todas las salidas de neuronas, excepto la que tiene el valor inicial más grande (que corresponde al patrón prototipo más cercano en la distancia de Hamming a la entrada).
+\subsection{Diagrama de flujo}
+
+
+\subsection{Experimentos}
+Neurona con 3 clases\\
+Que archivo quieres procesar, en cuanto a clases?(3,5,8): 3
+
+a2 =
+
+0
+0
+5.1629
+
+La red convergió en la iteracion 43 en la clase 3.\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{clase3}
+\end{figure}
+Neurona con 5 clases\\
+Que archivo quieres procesar, en cuanto a clases?(3,5,8): 5
+
+a2 =
+
+8.8394
+0
+0
+0
+0
+
+La red convergió en la iteracion 18 en la clase 1.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{clase5}
+\end{figure}
+Neurona con 8 clases\\
+Que archivo quieres procesar, en cuanto a clases?(3,5,8): 8
+
+a2 =
+
+4.8114
+0
+0
+0
+0
+0
+0
+0
+
+La red convergió en la iteracion 11 en la clase 1.\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{clase8}
+\end{figure}
+\subsection{Discusión}
+En la sección donde presentamos los resultados de 3 matrices de pesos y vectores de entrada
+totalmente distintos, pudimos observar cómo se lleva a cabo las iteraciones de la red de Hamming
+hasta converger a una de las clases y poder clasificar correctamente el vector de entrada p.
+Además, al escribir los datos en un archivo de texto nos ahorramos el problema de estar gastando
+memoria RAM, que, aunque en este caso no se ocupa demasiada, puede llegar un momento en el
+que le tome a la RNA llegar a converger a una clase muchas iteraciones y estar guardando cada
+salida tendría un costo de almacenamiento bastante alto.
+\subsection{Conclusiones}
+Se concluye por medio de la práctica y la implementación de la misma, que la red de Hamming sirve para clasificar vectores prototipo por medio de dos capas, la capa hacia adelante, y la capa recurrente, donde en esta última se compite para escoger al resultado ganador.
+\subsection{Referencias}
+[1] “Red Hamming”, class notes for Neural Networks, Department of Engineering in Computer
+Systems, Escuela Superior de Cómputo, 2017.
+\end{document}
