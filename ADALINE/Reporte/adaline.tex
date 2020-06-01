@@ -1,0 +1,183 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[a4paper,margin=3cm]{geometry}
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		{\bfseries\LARGE INSTITUTO POLITÉCNICO NACIONAL \par}
+		\vspace{1cm}
+		{\scshape\Large Escuela Superior de Cómputo \par}
+		\vspace{3cm}
+		{\scshape\Huge Red ADALINE implementada en Matlab para modos regresor y clasificador. \par}
+		\vspace{3cm}
+		{\itshape\Large Neural Networks \par}
+		\vfill
+		{\Large Autor: \par}
+		{\Large Erik Alberto Pizaña Canedo \par}
+		\vfill
+		{\Large Mayo 2020 \par}
+	\end{titlepage}
+	
+	\section{INTRODUCCIÓN.}
+	La red ADALINE es muy similar al perceptrón, excepto que su función de transferencia es lineal, en lugar de limitarla. Tanto el ADALINE como el perceptrón sufren la misma limitación inherente: solo pueden resolver problemas linealmente separables.
+	
+
+	\subsection{Orígenes.}
+	Bernard Widrow comenzó a trabajar en redes neuronales a fines de la década de 1950, aproximadamente al mismo tiempo que Frank Rosenblatt desarrolló la regla de aprendizaje del perceptrón. En 1960, Widrow, y su estudiante graduado Marcian Hoff, introdujeron la red ADALINE (ADAptive LInear NEuron) y una regla de aprendizaje que llamaron el algoritmo LMS (Least Mean Square).
+	
+	Widrow dejó de trabajar en redes neuronales a principios de la década de 1960 y comenzó a trabajar a tiempo completo en la señal adaptativa Procesando. Volvió al campo de las redes neuronales en la década de 1980 y comenzó a investigar el uso de las redes neuronales en el control adaptativo, utilizando la propagación temporal, un descendiente de su algoritmo LMS original.
+	
+	\subsection{Principales Capacidades.}
+	El algoritmo LMS, sin embargo, es más poderoso que la regla de aprendizaje perceptron. Si bien se garantiza que la regla del perceptrón converge a una solución que clasifica correctamente los patrones de entrenamiento, la red resultante puede ser sensible al ruido, ya que los patrones a menudo se encuentran cerca de los límites de decisión. El algoritmo LMS minimiza el error cuadrático medio y, por lo tanto, trata de mover los límites de decisión lo más lejos posible de los patrones de entrenamiento. El algoritmo LMS ha encontrado muchos más usos prácticos que la regla de aprendizaje perceptron. Esto es especialmente cierto en el área del procesamiento de señales digitales. Por ejemplo, la mayoría de las líneas telefónicas de larga distancia utilizan redes ADALINE para la cancelación de eco.
+	El aprendizaje de Widrow-Hoff es un algoritmo de descenso aproximado más pronunciado, en el que el índice de rendimiento es el error cuadrático medio. Este algoritmo es importante para nuestra discusión por dos razones. Primero, hoy se usa ampliamente en muchas aplicaciones de procesamiento de señales. Además, es el precursor del algoritmo de retropropagación para redes multicapa.
+	\newpage
+	\section{Marco Teórico.}
+	La red ADALINE es mostrada en la figura 1. Note que tiene la misma estructura que la red Perceptron, la única diferencia es que tiene una función de transferencia lineal.
+	\subsection{Arquitectura y Modelo Matemático.}
+	\begin{figure}[H]
+		\centering
+		\includegraphics{Arquitectura.PNG}
+		\caption{Red ADALINE.}
+	\end{figure}
+	La salida de la red está dada por:
+	\begin{equation}
+		a = purelin(Wp + B) = Wp + B
+	\end{equation}
+	Recordemos la discusión de la red Perceptron que el iésimo elemento del vector de salida de la red puede ser escrito como:
+	\begin{equation}
+	a_i = purelin(n_i) = purelin(_iw^Tp + b_i) = _iw^Tp + b_i
+	\end{equation}
+	donde $_iw$ es creado de los elementos de la iésima fila de W:
+	\begin{equation}
+	_i w = \begin{bmatrix}
+	w_{i,1}\\w_{i,2}\\.\\.\\.\\w_{i,R}
+	\end{bmatrix}
+	\end{equation}	
+	\newpage
+	\section{Diagrama de Flujo.}
+	A continuación se muestra el diagrama de flujo de la implementación de la red ADALINE en matlab.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth, height= 8in]{diagrama.PNG}
+		\caption{Diagrama de Flujo.}
+	\end{figure}
+\newpage
+	\section{Experimentos.}
+	A continuación se muestran todos los experimentos llevados acabo tanto en modo regresor como en modo clasificador, y sus respectivas gráficas de evolución de matriz de pesos, bias y eepoch.
+	\subsection{Regresor. Codificador 8 bits.}
+	En el modo regresor de la red ADALINE, no ocupa bias.
+	Se pide al usuario el modo, el máximo de épocas, el valor de error esperado(se recomienda un valor muy pequeño, por ejemplo de 0.001 o menor.), el factor de aprendizaje alfa(en un rango mayor a 0 y menor a 0.2) y el número de bits del codificador deseado. En medio de la implementación de este caso, se crea un dataset el cual se guarda en un archivo de texto plano el cual posteriormente se lee para el entrenamiento de la red.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{consola8bits.PNG}
+		\caption{Salida por consola.}
+	\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafw8bits.PNG}
+	\caption{Gráfica matriz W.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{graferr8bits.PNG}
+	\caption{Gráfica EEPOCH.}
+\end{figure}
+\subsection{Regresor. Codificador 12 bits.}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{consola12bits.PNG}
+	\caption{Salida por consola.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafw12bits.PNG}
+	\caption{Gráfica matriz W.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{graferr12bits.PNG}
+	\caption{Gráfica EEPOCH.}
+\end{figure}
+\newpage
+\subsection{Clasificador. 2 Clases.}
+En el modo clasificador sí se ocupa la parte del bias, y se piden los mismos datos de entrada que en los experimentos del regresor, a diferencia del dataset que ya viene establecido con los vectores prototipo los cuales se leen de un archivo para su posterior análisis. Para estos experimentos utilizamos el ejemplo de la naranja y la manzana para clasificar 2 clases, la compuerta xor y un ejemplo incluido en el libro del curso para clasificar 8 vectores en 4 clases.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{consola2clases.PNG}
+	\caption{Salida por consola.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafw2clases.PNG}
+	\caption{Gráfica matriz W.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafb2clases.PNG}
+	\caption{Gráfica Bias.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{graferr2clases.PNG}
+	\caption{Gráfica EEPOCH.}
+\end{figure}	
+\subsection{Clasificador. 4 Clases.}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{consola4clases.PNG}
+	\caption{Salida por consola.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafw4clases.PNG}
+	\caption{Gráfica matriz W.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafb4clases.PNG}
+	\caption{Gráfica Bias.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{graferr4clases.PNG}
+	\caption{Gráfica EEPOCH.}
+\end{figure}
+\subsection{Clasificador. Compuerta XOR.}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{consolaxor.PNG}
+	\caption{Salida por consola.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafwxor.PNG}
+	\caption{Gráfica matriz W.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{grafbxor.PNG}
+	\caption{Gráfica Bias.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{graferrxor.PNG}
+	\caption{Gráfica EEPOCH.}
+\end{figure}
+\section{Discusión.}	
+Con los experimentos hechos y sus respectivas gráficas pudimos observar que tanto la matriz de pesos así como el bias(en el caso del modo clasificador), siempre convergen a ciertos valores, siendo esto, un indicador de que se llevo acabo un buen aprendizaje de la red. También se pudo notar que dependiendo del valor del factor de aprendizaje(alfa) y el error(eepoch) esperado, la convergencia de dichos valores repercute en la aproximación de la igualdad entre targets y el vector salida de la red. Cabe mencionar que el vector de salida de la red en modo regresor fue un 99\% exacto comparado con los targets deseados; y en el caso del modo clasificador, esta exactitud fue aproximadamente de un 80\%.
+\section{Conclusión.} 
+La red ADALINE se puede ver como una mejora de la red Perceptron, ya que esta última necesita S neuronas para separar $2^S$ clases. Además el proceso de aprendizaje varía un poco y el factor de aprendizaje ayuda a que la matriz de pesos W y el bias no crezcan demasiado. Y aunque esta red también tiene la limitante de resolver sólo problemas linealmente separables, su algoritmo de aprendizaje así como su función de transferencia lineal nos da la posibilidad de tener más poder en cuanto a la resolución de problemas.
+
+\section{Bibliografía} 
+
+Beale, H. D., Demuth, H. B., \& Hagan, M. T. (1996). Neural network design. Pws, Boston. 
+	
+		
+\end{document}
